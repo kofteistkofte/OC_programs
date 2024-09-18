@@ -1,5 +1,5 @@
 local controllers = {}
 
-controllers.FluidReactorController = require(".fluid")
+controllers.FluidReactorController = require("reactor_controller.controllers.fluid")
 
 return controllers

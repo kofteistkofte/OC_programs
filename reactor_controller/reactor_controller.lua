@@ -115,7 +115,7 @@ local manager = Manager:new(load_config())
 
 
 while true do
-    local id, _, _ = event.pul(1, "interrupted")
+    local id, _, _ = event.pull(1, "interrupted")
     if id == "interrupted" then
         print("Closing the program.")
         manager:stop_all()

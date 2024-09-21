@@ -9,8 +9,8 @@ FluidReactorController.__index = FluidReactorController
 ---@param name string
 ---@param reactor string
 ---@param exchanger string
----@param coolant string
----@param water string
+---@param coolant table
+---@param water table
 ---@return FluidReactorController
 function FluidReactorController:new(name, reactor, exchanger, coolant, water)
     setmetatable(self, FluidReactorController)

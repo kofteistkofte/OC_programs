@@ -105,7 +105,7 @@ function Manager:print_reactors()
         local water_bar = create_bar(status.water.level, status.water.capacity)
         print("Water Tank:      "..water_bar)
         print("                 "..status.water.level.."/"..status.water.capacity)
-        print("Heat Exchanger:  "..status.heat_exchanger.active)
+        print("Heat Exchanger:  "..tostring(status.heat_exchanger.active))
         print("                 "..status.heat_exchanger.progress)
     end
 end

@@ -15,7 +15,7 @@ Tank.__index = Tank
 function Tank:new(address, lower_threashold, upper_threashold)
     setmetatable(self, Tank)
     local controller = component.proxy(address)
-    if controller.type ~= "tank_contoller" then
+    if controller.type ~= "tank_controller" then
         error("The component \""..address.."\" is not a Tank Controller")
     end
     self.address = address

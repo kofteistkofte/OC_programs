@@ -57,8 +57,12 @@ function FluidReactorController:check_system_health()
 end
 
 function FluidReactorController:get_status()
+    local is_active = "Reactor is inactive"
+    if self.active then
+        is_active = "Reactor is ACTIVE"
+    end
     local data = {
-        is_active = self.active,
+        is_active = is_active,
         reactor = {
             heat = self.reactor.controller.getHeat(),
             max_heat = self.reactor.max_heat

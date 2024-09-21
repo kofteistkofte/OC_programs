@@ -68,11 +68,11 @@ function FluidReactorController:get_status()
             progress = self.heat_exchanger.controller.getWorkProgress()
         },
         coolant = {
-            level = self.coolant_tank.controller.getTankLevel(),
+            level = self.coolant_tank.controller.getTankLevel(self.coolant_tank.side),
             capacity = self.coolant_tank.capacity
         },
         water = {
-            level = self.water_tank.controller.getTankLevel(),
+            level = self.water_tank.controller.getTankLevel(self.water_tank.side),
             capacity = self.water_tank.capacity
         }
     }

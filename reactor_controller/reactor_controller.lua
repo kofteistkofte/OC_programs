@@ -54,9 +54,9 @@ function Manager:new(config)
     setmetatable(self, Manager)
     self.fluid_reactors = {}
     if config.fluid_reactors then
-        for index, cfg in pairs do
+        for index, cfg in pairs(config.fluid_reactors) do
 
-            for _, field in {"name", "reactor", "heat_exchanger", "coolant_tank", "water_tank"} do
+            for _, field in pairs({"name", "reactor", "heatexchanger", "coolanttank", "watertank"}) do
                 if not cfg[field] then
                     error("Missing field of \""..field.."\" in the fluid reactor number "..index)
                 end
@@ -65,9 +65,9 @@ function Manager:new(config)
             local fluid_reactor = controllers.FluidReactorController:new(
                 cfg.name,
                 cfg.reactor,
-                cfg.heat_exchanger,
-                cfg.coolant_tank,
-                cfg.water_tank
+                cfg.heatexchanger,
+                cfg.coolanttank,
+                cfg.watertank
             )
             table.insert(self.fluid_reactors, fluid_reactor)
         end

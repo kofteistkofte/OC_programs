@@ -19,7 +19,7 @@ function Tank:new(address, lower_threashold, upper_threashold)
         error("The component \""..address.."\" is not a Tank Controller")
     end
     self.address = address
-    self.side = address[1]
+    self.side = address[2]
     self.controller = controller
     self.lower_threashold = lower_threashold
     self.upper_threashold = upper_threashold

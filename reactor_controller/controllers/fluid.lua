@@ -15,10 +15,10 @@ FluidReactorController.__index = FluidReactorController
 function FluidReactorController:new(name, reactor, exchanger, coolant, water)
     setmetatable(self, FluidReactorController)
     self.name = name
-self.reactor = modules.FluidReactor:new(reactor)
+    self.reactor = modules.FluidReactor:new(reactor)
     self.heat_exchanger = modules.HeatExchanger:new(exchanger)
-    self.coolant_tank = modules.Tank:new(coolant, 1.0, 3.0)
-    self.water_tank = modules.Tank:new(water, 10.0, 40.0)
+    self.coolant_tank = modules.Tank:new(coolant[1], coolant[2], 1.0, 3.0)
+    self.water_tank = modules.Tank:new(water[1], water[2], 10.0, 40.0)
     self.active = false
     return self
 end

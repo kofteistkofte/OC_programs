@@ -8,18 +8,19 @@ local Tank = {}
 
 Tank.__index = Tank
 
----@param address table
+---@param address string
+---@param side integer
 ---@param lower_threashold number
 ---@param upper_threashold number
 ---@return Tank
-function Tank:new(address, lower_threashold, upper_threashold)
+function Tank:new(address, side, lower_threashold, upper_threashold)
     setmetatable(self, Tank)
-    local controller = component.proxy(address[1])
+    local controller = component.proxy(address)
     if controller.type ~= "tank_controller" then
         error("The component \""..address.."\" is not a Tank Controller")
     end
     self.address = address
-    self.side = address[2]
+    self.side = side
     self.controller = controller
     self.lower_threashold = lower_threashold
     self.upper_threashold = upper_threashold

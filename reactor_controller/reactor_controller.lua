@@ -3,6 +3,7 @@ local fs = require("filesystem")
 local term = require("term")
 local event = require("event")
 local controllers = require("reactor_controller.controllers")
+local modules = require("reactor_controller.modules")
 
 
 ---@param value number
@@ -44,6 +45,7 @@ end
 
 ---@class Manager
 ---@field fluid_reactors [FluidReactorController]
+---@field redstone Redstone
 local Manager = {}
 
 Manager.__index = Manager
@@ -53,6 +55,12 @@ Manager.__index = Manager
 function Manager:new(config)
     setmetatable(self, Manager)
     self.fluid_reactors = {}
+    if config.redstone then
+        self.redstone = modules.Redstone:new(
+            config.redstone.address,
+            config.redstone.side
+        )
+    end
     if config.fluid_reactors then
         for index, cfg in pairs(config.fluid_reactors) do
 
@@ -76,8 +84,13 @@ function Manager:new(config)
 end
 
 function Manager:check()
-    for _, reactor in pairs(self.fluid_reactors) do
-        reactor:check_system_health()
+    -- Check for master redstone signal and shut down every reactor if it's on
+    if self.redstone:check_signal(14) then
+        self:stop_all()
+    else
+        for _, reactor in pairs(self.fluid_reactors) do
+            reactor:check_system_health()
+        end
     end
 end
 

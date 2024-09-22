@@ -2,7 +2,7 @@ local serial = require("serialization")
 local fs = require("filesystem")
 local term = require("term")
 local event = require("event")
-local modules = require("reactor_controller.modules")
+local componen = require("component")
 local controllers = require("reactor_controller.controllers")
 
 
@@ -45,7 +45,7 @@ end
 
 ---@class Manager
 ---@field fluid_reactors [FluidReactorController]
----@field redstone Redstone
+---@field redstone table
 local Manager = {}
 
 Manager.__index = Manager
@@ -56,10 +56,8 @@ function Manager:new(config)
     setmetatable(self, Manager)
     self.fluid_reactors = {}
     if config.redstone then
-        self.redstone = modules.Redstone:new(
-            config.redstone.address,
-            config.redstone.side
-        )
+        self.redstone = componen.proxy(config.redstone.address)
+        self.redstone_side =config.redstone.side
     end
     if config.fluid_reactors then
         for index, cfg in pairs(config.fluid_reactors) do
@@ -132,7 +130,7 @@ while true do
         break
     end
 
-    if manager.redstone:check_signal(14) then
+    if manager.redstone.getBundledOutput(manager.redstone_side, 14) then
         manager:stop_all()
     else
         manager:check()

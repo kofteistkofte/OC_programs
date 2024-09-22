@@ -84,21 +84,18 @@ function Manager:new(config)
 end
 
 function Manager:check()
-    -- Check for master redstone signal and shut down every reactor if it's on
-    if self.redstone:check_signal(14) then
-        self:stop_all()
-    else
-        for _, reactor in pairs(self.fluid_reactors) do
-            reactor:check_system_health()
-        end
+    for _, reactor in pairs(self.fluid_reactors) do
+        reactor:check_system_health()
     end
 end
 
 function Manager:stop_all()
     print('Shutting down all the reactors')
     for _, reactor in pairs(self.fluid_reactors) do
-        print('Shutting down reactor '..reactor.name)
-        reactor:set_status(false)
+        if reactor.active then
+            print('Shutting down reactor '..reactor.name)
+            reactor:set_status(false)
+        end
     end
 end
 
@@ -134,6 +131,12 @@ while true do
         manager:stop_all()
         break
     end
-    manager:check()
+
+    if manager.redstone:check_signal(14) then
+        manager:stop_all()
+    else
+        manager:check()
+    end
+
     manager:print_reactors()
 end

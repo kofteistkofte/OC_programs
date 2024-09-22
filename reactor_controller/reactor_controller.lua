@@ -2,8 +2,8 @@ local serial = require("serialization")
 local fs = require("filesystem")
 local term = require("term")
 local event = require("event")
-local controllers = require("reactor_controller.controllers")
 local modules = require("reactor_controller.modules")
+local controllers = require("reactor_controller.controllers")
 
 
 ---@param value number

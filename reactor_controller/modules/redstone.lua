@@ -21,7 +21,6 @@ function Redstone:new(address, side)
     return self
 end
 
----@param side integer
 ---@param colour integer
 ---@return boolean
 function Redstone:check_signal(colour)
@@ -32,5 +31,6 @@ function Redstone:check_signal(colour)
         return true
     end
 end
+
 
 return Redstone

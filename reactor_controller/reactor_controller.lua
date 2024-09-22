@@ -60,7 +60,7 @@ function Manager:new(config)
     setmetatable(self, Manager)
     self.fluid_reactors = {}
     if config.redstone then
-        redstone_side = config.redstone.side
+        redstone_side = config.redstone
     end
     if config.fluid_reactors then
         for index, cfg in pairs(config.fluid_reactors) do
@@ -133,7 +133,7 @@ while true do
         break
     end
 
-    if component.redstone.getBundledInput(redstone_side, colors.red) then
+    if component.redstone.getBundledInput(redstone_side, colors.red) > 0 then
         manager:stop_all()
     else
         manager:check()

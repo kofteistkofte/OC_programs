@@ -24,11 +24,13 @@ end
 ---@param side integer
 ---@param colour integer
 ---@return boolean
-function Redstone:check_signal(side, colour)
-    local output = self.controller.getBundledInput(side, colour)
+function Redstone:check_signal(colour)
+    local output = self.controller.getBundledInput(self.side, colour)
     if output == 0 then
         return false
     else
         return true
     end
 end
+
+return Redstone

@@ -10,8 +10,7 @@ FluidReactor.__index = FluidReactor
 
 ---@param address string
 ---@return FluidReactor
-function FluidReactor.new(address)
-    local self = {}
+function FluidReactor:new(address)
     local controller = component.proxy(address)
     if controller.type ~= "reactor_redstone_port" then
         error("The component \""..address.."\" is not a Reactor Redstone Port")

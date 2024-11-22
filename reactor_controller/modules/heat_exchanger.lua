@@ -9,8 +9,7 @@ HeatExchanger.__index = HeatExchanger
 
 ---@param address string
 ---@return HeatExchanger
-function HeatExchanger.new(address)
-    local self = {}
+function HeatExchanger:new(address)
     local controller = component.proxy(address)
     if controller.type ~= "gt_machine" then
         error("The component \""..address.."\" is not a GregTech Machine")

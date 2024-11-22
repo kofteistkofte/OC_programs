@@ -13,8 +13,7 @@ Tank.__index = Tank
 ---@param lower_threashold number
 ---@param upper_threashold number
 ---@return Tank
-function Tank.new(address, side, lower_threashold, upper_threashold)
-    local self = {}
+function Tank:new(address, side, lower_threashold, upper_threashold)
     local controller = component.proxy(address)
     if controller.type ~= "tank_controller" then
         error("The component \""..address.."\" is not a Tank Controller")

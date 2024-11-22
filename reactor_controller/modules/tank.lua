@@ -13,8 +13,8 @@ Tank.__index = Tank
 ---@param lower_threashold number
 ---@param upper_threashold number
 ---@return Tank
-function Tank:new(address, side, lower_threashold, upper_threashold)
-    setmetatable(self, Tank)
+function Tank.new(address, side, lower_threashold, upper_threashold)
+    local self = {}
     local controller = component.proxy(address)
     if controller.type ~= "tank_controller" then
         error("The component \""..address.."\" is not a Tank Controller")
@@ -26,6 +26,7 @@ function Tank:new(address, side, lower_threashold, upper_threashold)
     self.upper_threashold = upper_threashold
     self.capacity = self.controller.getTankCapacity(self.side)
     self.is_healty = true
+    setmetatable(self, Tank)
     return self
 end
 

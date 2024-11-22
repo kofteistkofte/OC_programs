@@ -9,8 +9,8 @@ HeatExchanger.__index = HeatExchanger
 
 ---@param address string
 ---@return HeatExchanger
-function HeatExchanger:new(address)
-    setmetatable(table, HeatExchanger)
+function HeatExchanger.new(address)
+    local self = {}
     local controller = component.proxy(address)
     if controller.type ~= "gt_machine" then
         error("The component \""..address.."\" is not a GregTech Machine")
@@ -19,6 +19,7 @@ function HeatExchanger:new(address)
     end
     self.address = address
     self.controller = controller
+    setmetatable(table, HeatExchanger)
     return self
 end
 

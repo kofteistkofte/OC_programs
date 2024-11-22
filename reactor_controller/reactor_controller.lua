@@ -71,7 +71,7 @@ function Manager:new(config)
                 end
             end
 
-            local fluid_reactor = controllers.FluidReactorController:new(
+            local fluid_reactor = controllers.FluidReactorController.new(
                 cfg.name,
                 cfg.reactor,
                 cfg.heatexchanger,

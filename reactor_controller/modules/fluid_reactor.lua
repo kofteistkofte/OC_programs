@@ -2,6 +2,7 @@ local component = require("component")
 
 
 ---@class FluidReactor
+---@field address string
 ---@field controller 'component.proxy'
 ---@field max_heat integer
 local FluidReactor = {}
@@ -10,7 +11,8 @@ FluidReactor.__index = FluidReactor
 
 ---@param address string
 ---@return FluidReactor
-function FluidReactor:new(address)
+function FluidReactor.new(address)
+    local self = setmetatable({}, FluidReactor)
     local controller = component.proxy(address)
     if controller.type ~= "reactor_redstone_port" then
         error("The component \""..address.."\" is not a Reactor Redstone Port")
@@ -19,7 +21,6 @@ function FluidReactor:new(address)
     self.controller = controller
     self.active = false
     self.max_heat = self.controller.getMaxHeat()
-    setmetatable(self, FluidReactor)
     return self
 end
 

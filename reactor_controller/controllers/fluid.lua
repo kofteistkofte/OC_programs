@@ -2,6 +2,11 @@ local modules = require("reactor_controller.modules")
 
 
 ---@class FluidReactorController
+---@field name string
+---@field reactor FluidReactor
+---@field heat_exchanger HeatExchanger
+---@field coolant_tank Tank
+---@field water_tank Tank
 local FluidReactorController = {}
 
 FluidReactorController.__index = FluidReactorController
@@ -12,14 +17,14 @@ FluidReactorController.__index = FluidReactorController
 ---@param coolant table
 ---@param water table
 ---@return FluidReactorController
-function FluidReactorController:new(name, reactor, exchanger, coolant, water)
+function FluidReactorController.new(name, reactor, exchanger, coolant, water)
+    local self = setmetatable({}, FluidReactorController)
     self.name = name
-    self.reactor = modules.FluidReactor:new(reactor)
-    self.heat_exchanger = modules.HeatExchanger:new(exchanger)
-    self.coolant_tank = modules.Tank:new(coolant[1], coolant[2], 1.0, 3.0)
-    self.water_tank = modules.Tank:new(water[1], water[2], 10.0, 40.0)
+    self.reactor = modules.FluidReactor.new(reactor)
+    self.heat_exchanger = modules.HeatExchanger.new(exchanger)
+    self.coolant_tank = modules.Tank.new(coolant[1], coolant[2], 1.0, 3.0)
+    self.water_tank = modules.Tank.new(water[1], water[2], 10.0, 40.0)
     self.active = false
-    setmetatable(self, FluidReactorController)
     return self
 end
 

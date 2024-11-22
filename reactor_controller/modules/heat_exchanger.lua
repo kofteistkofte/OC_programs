@@ -2,6 +2,7 @@ local component = require("component")
 
 
 ---@class HeatExchanger
+---@field address string
 ---@field controller 'component.proxy'
 local HeatExchanger = {}
 
@@ -9,7 +10,8 @@ HeatExchanger.__index = HeatExchanger
 
 ---@param address string
 ---@return HeatExchanger
-function HeatExchanger:new(address)
+function HeatExchanger.new(address)
+    local self = setmetatable({}, HeatExchanger)
     local controller = component.proxy(address)
     if controller.type ~= "gt_machine" then
         error("The component \""..address.."\" is not a GregTech Machine")
@@ -18,7 +20,6 @@ function HeatExchanger:new(address)
     end
     self.address = address
     self.controller = controller
-    setmetatable(table, HeatExchanger)
     return self
 end
 

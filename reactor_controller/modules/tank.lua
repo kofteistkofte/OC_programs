@@ -6,7 +6,7 @@ local component = require("component")
 ---@field side integer
 ---@field lower_threashold number
 ---@field upper_threashold number
----@field controller 'component.proxy'
+---@field controller tank_controller
 ---@field capacity number
 local Tank = {}
 
@@ -19,7 +19,7 @@ Tank.__index = Tank
 ---@return Tank
 function Tank.new(address, side, lower_threashold, upper_threashold)
     local self = setmetatable({}, Tank)
-    local controller = component.proxy(address)
+    local controller = component.proxy(address, 'tank_controller')
     if controller.type ~= "tank_controller" then
         error("The component \""..address.."\" is not a Tank Controller")
     end

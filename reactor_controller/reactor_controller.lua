@@ -101,24 +101,26 @@ function Manager:stop_all()
 end
 
 function Manager:print_reactors()
-    term.clear()
+    local fb = ""
     for _, reactor in pairs(self.fluid_reactors) do
         local status = reactor:get_status()
-        print("-----------------")
-        print("Fluid Reactor:   "..reactor.name)
-        print("Is Active:       "..status.is_active)
         local heat_bar = create_bar(status.reactor.heat, status.reactor.max_heat)
-        print("Reactor Heat:    "..heat_bar)
-        print("                 "..status.reactor.heat.."/"..status.reactor.max_heat)
         local coolant_bar = create_bar(status.coolant.level, status.coolant.capacity)
-        print("Coolant Tank:    "..coolant_bar)
-        print("                 "..status.coolant.level.."/"..status.coolant.capacity)
         local water_bar = create_bar(status.water.level, status.water.capacity)
-        print("Water Tank:      "..water_bar)
-        print("                 "..status.water.level.."/"..status.water.capacity)
-        print("Heat Exchanger:  "..tostring(status.heat_exchanger.active))
-        print("                 "..status.heat_exchanger.progress)
+        fb = fb.."-----------------"
+        .."\nFluid Reactor:   "..reactor.name
+        .."\nIs Active:       "..status.is_active
+        .."\nReactor Heat:    "..heat_bar
+        .."\n                 "..status.reactor.heat.."/"..status.reactor.max_heat
+        .."\nCoolant Tank:    "..coolant_bar
+        .."\n                 "..status.coolant.level.."/"..status.coolant.capacity
+        .."\nWater Tank:      "..water_bar
+        .."\n                 "..status.water.level.."/"..status.water.capacity
+        .."\nHeat Exchanger:  "..tostring(status.heat_exchanger.active)
+        .."                 "..status.heat_exchanger.progress.."\n"
     end
+    term.clear()
+    print(fb)
 end
 
 

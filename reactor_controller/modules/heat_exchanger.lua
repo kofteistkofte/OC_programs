@@ -3,7 +3,7 @@ local component = require("component")
 
 ---@class HeatExchanger
 ---@field address string
----@field controller 'component.proxy'
+---@field controller gt_machine
 local HeatExchanger = {}
 
 HeatExchanger.__index = HeatExchanger
@@ -12,7 +12,7 @@ HeatExchanger.__index = HeatExchanger
 ---@return HeatExchanger
 function HeatExchanger.new(address)
     local self = setmetatable({}, HeatExchanger)
-    local controller = component.proxy(address)
+    local controller = component.proxy(address, "gt_machine")
     if controller.type ~= "gt_machine" then
         error("The component \""..address.."\" is not a GregTech Machine")
     elseif controller.getName() ~= "multimachine.heatexchanger" then

@@ -25,7 +25,6 @@ function FluidReactor.new(address)
 end
 
 function FluidReactor:start()
-    print("Starting the Fluid Reactor "..self.address)
     self.controller.setActive(true)
     self.active = true
 end

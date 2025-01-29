@@ -24,7 +24,6 @@ function HeatExchanger.new(address)
 end
 
 function HeatExchanger:start()
-    print('Starting the Heat Exchanger '..self.address)
     self.controller.setWorkAllowed(true)
 end
 

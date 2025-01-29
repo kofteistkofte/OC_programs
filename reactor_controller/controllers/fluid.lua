@@ -58,7 +58,7 @@ function FluidReactorController:check_system_health()
     elseif self.active and not (tank_health and reactor_health) then
         print('Health  of Reactor '..self.name..' is not ok. Shutting down.')
         self:set_status(false)
-    elseif self.active and reactor_health and not self.active then
+    elseif self.active and reactor_health then
         self:set_status(true)
     end
 end
